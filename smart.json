@@ -1,0 +1,10 @@
+{
+	"name": "managedUsers",
+	"description": "A Managed User system, with a single administrator account (admin), with the ability to create/modify accounts, and set permissions.",
+	"homepage": "https://github.com/jzgoda/managedUsers",
+	"author": "Jon Zgoda <jon@zgoda.us>",
+	"version": "0.1.0",
+	"git": "https://github.com/jzgoda/managedUsers.git",
+	"packages": {
+	}
+}
