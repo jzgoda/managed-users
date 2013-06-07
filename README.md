@@ -40,7 +40,7 @@ Adding Permissions
 Just add the below function somewhere where both the server and client have access to it, and then return an object of key/value pairs.
 
 ```javascript
-availablePermissions: function() {
+Meteor.ManagedUsers.availablePermissions = function() {
 	// Return an object of key/value pairs, like:  {permissionName: "Permission Description", ....}
 	// Do this in a file accessible by both the server and client.
 	return {};
