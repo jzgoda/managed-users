@@ -50,4 +50,4 @@ Meteor.ManagedUsers.availablePermissions = function() {
 To Do
 -------
 * Incorporate a better Error pattern (like the one in the Discover Meteor book)
-* ?
+* Implement Roles

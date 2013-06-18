@@ -134,7 +134,7 @@ if(Meteor.isClient) {
 
 	// Pass the permission name (as a string) to this helper
 	Handlebars.registerHelper('hasPermission', function(permission) {
-		if(Meteor.user() && ((Meteor.user().username === "admin") || (Meteor.user().permissions && _.contains(Meteor.user().permissions, {permission: true}))))
+		if(Meteor.user() && ((Meteor.user().username === "admin") || (Meteor.user().permissions && Meteor.user().permissions[permission] == true)))
 			return true;
 	});
 }
