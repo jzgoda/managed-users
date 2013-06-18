@@ -30,6 +30,11 @@ Meteor.ManagedUsers = {
 			if(u && (!userId || (u._id !== userId)))
 				throw new Meteor.Error(500, "Email Address already in use.");
 		}
+	},
+
+	hasPermission: function(permission) {
+		if(Meteor.user() && ((Meteor.user().username === "admin") || (Meteor.user().permissions && Meteor.user().permissions[permission] == true)))
+			return true;
 	}
 }
 
@@ -134,7 +139,6 @@ if(Meteor.isClient) {
 
 	// Pass the permission name (as a string) to this helper
 	Handlebars.registerHelper('hasPermission', function(permission) {
-		if(Meteor.user() && ((Meteor.user().username === "admin") || (Meteor.user().permissions && Meteor.user().permissions[permission] == true)))
-			return true;
+		return Meteor.ManagedUsers.hasPermission(permission);
 	});
 }

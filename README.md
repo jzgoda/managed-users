@@ -47,6 +47,11 @@ Meteor.ManagedUsers.availablePermissions = function() {
 },
 ```
 
+Testing for Permissions
+------------------------
+` Meteor.ManagedUsers.hasPermission(permissionName) ` accepts a string of the permission's name, and then returns a boolean if the current user has that permission.
+
+
 To Do
 -------
 * Incorporate a better Error pattern (like the one in the Discover Meteor book)
