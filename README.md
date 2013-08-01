@@ -18,7 +18,7 @@ Install using Meteorite:
 ``` sh
 mrt add managedUsers
 ```	
-Meteor Package Requirements: bootstrap, accounts-password, accounts-ui-bootstrap-dropdown, email
+Meteor Package Requirements: bootstrap, accounts-password, accounts-ui, email
 
 External Requirement: bootbox (http://bootboxjs.com/)
 
