@@ -12,23 +12,23 @@ Meteor.ManagedUsers = {
 
 	checkUsername: function(username, userId) {
 		if(!username)
-			throw new Meteor.Error(500, "Username can not be blank.");
+			throw new Meteor.Error(400, "Username can not be blank.");
 		var usernamePattern = /^[a-z]+$/g;
 		if(!usernamePattern.test(username))
-			throw new Meteor.Error(500, "Username format is incorrect.");
+			throw new Meteor.Error(400, "Username format is incorrect.");
 		var u = Meteor.users.findOne({username: username});
 		if(u && (!userId || (u._id !== userId)))
-			throw new Meteor.Error(500, "Username already in use.");
+			throw new Meteor.Error(400, "Username already in use.");
 	},
 
 	checkEmailAddress: function(address, userId) {
 		if(address) {
 			var emailPattern =  /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i;
 			if(!emailPattern.test(address))
-				throw new Meteor.Error(500, "Email Address format is incorrect.");
+				throw new Meteor.Error(400, "Email Address format is incorrect.");
 			var u = Meteor.users.findOne({emails: { $elemMatch: { address: address}}});
 			if(u && (!userId || (u._id !== userId)))
-				throw new Meteor.Error(500, "Email Address already in use.");
+				throw new Meteor.Error(400, "Email Address already in use.");
 		}
 	},
 
@@ -70,7 +70,7 @@ if(Meteor.isServer) {
 				throw new Meteor.Error(401, "Only admin is allowed to do this.");
 			Meteor.ManagedUsers.checkUsername(username, userId);
 			if(!name)
-				throw new Meteor.Error(500, "Name can not be blank.");
+				throw new Meteor.Error(400, "Name can not be blank.");
 			Meteor.ManagedUsers.checkEmailAddress(address, userId);
 			if(Meteor.user()._id === userId) {
 				username = "admin";
@@ -91,7 +91,7 @@ if(Meteor.isServer) {
 			try {
 				Accounts.sendResetPasswordEmail(userId);
 			} catch(e) {
-				throw new Meteor.Error(500, "Can't send email.");
+				throw new Meteor.Error(400, "Can't send email.");
 			}
 			return userId;
 		},
@@ -101,7 +101,7 @@ if(Meteor.isServer) {
 				throw new Meteor.Error(401, "Only admin is allowed to do this.");
 			Meteor.ManagedUsers.checkUsername(username);
 			if(!name)
-				throw new Meteor.Error(500, "Name can not be blank.");
+				throw new Meteor.Error(400, "Name can not be blank.");
 			Meteor.ManagedUsers.checkEmailAddress(address);
 			var newUserId = Accounts.createUser({username: username, email: address, profile: {name: name}});
 			if(address)
