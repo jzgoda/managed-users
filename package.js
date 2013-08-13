@@ -4,6 +4,7 @@ Package.describe({
 
 Package.on_use(function(api) {
 	api.use(['minimongo', 'mongo-livedata', 'templating', 'accounts-password', 'accounts-ui', 'email'], ['client', 'server']);
+	api.use(['handlebars'], 'client');
 	api.add_files(['managedUsers.js'], ['client', 'server']);
 	api.add_files(['managedUsersTemplates.html', 'managedUsersTemplates.js'], 'client');
 });
