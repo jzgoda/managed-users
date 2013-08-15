@@ -46,7 +46,9 @@ Template.managedUsers.events({
 		var self = this;
 		$("#"+self._id+"_edit .username").val(self.username);
 		$("#"+self._id+"_edit .name").val(self.profile.name);
-		$("#"+self._id+"_edit .email").val(self.emails[0].address);
+		if(self.emails && self.emails[0]) {
+			$("#"+self._id+"_edit .email").val(self.emails[0].address);
+		}
 		if(self.permissions) {
 			_.keys(self.permissions).forEach(function(k) {
 				$("#"+self._id+"_edit .permissions ."+k).prop('checked', self.permissions[k]);
