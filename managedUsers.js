@@ -76,10 +76,15 @@ if(Meteor.isServer) {
 				username = "admin";
 				name = "Administrator";
 			}
+			if(address) {
+				address = new Array({address: address});
+			} else {
+				address = null;
+			}
 			Meteor.users.update(userId, {$set: {
 				username: username,
 				profile: {name: name},
-				emails: [{address: address}],
+				emails: address,
 				permissions: permissions
 			}});
 			return userId;
