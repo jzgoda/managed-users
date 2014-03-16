@@ -4,8 +4,9 @@ ManagedUsers for Meteor
 This is a simple package for making Meteor's default Accounts system more managed.
 With it, you will get:
 * A single "admin" account (default password is "abc123"...obviously change this).
-* * A permissions system, which by default has no permissions (so, it's optional).
-* * Templates for adding, updating, and deleting user accounts.
+* A permissions system, which by default has no permissions (so, it's optional).
+* Templates for adding, updating, and deleting user accounts.
+* This package will prevent users from creating their own accounts.
 
 ----------------------
 
