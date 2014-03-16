@@ -18,7 +18,7 @@ Install using Meteorite:
 ``` sh
 mrt add managedUsers
 ```	
-Meteor Package Requirements: accounts-password, accounts-ui, email
+Meteor Package Requirements: accounts-password, email
 
 *The 'bootstrap-3' and 'accounts-ui-bootstrap-3' from Atmosphere are included as dependencies in smart.json.*
 *A minified version of Bootbox.js (http://bootboxjs.com/), is also included. (v4.2.0)*
