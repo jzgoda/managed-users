@@ -18,9 +18,10 @@ Install using Meteorite:
 ``` sh
 mrt add managedUsers
 ```	
-Meteor Package Requirements: bootstrap, accounts-password, accounts-ui, email
+Meteor Package Requirements: accounts-password, accounts-ui, email
 
-External Requirement: bootbox (http://bootboxjs.com/)
+*The 'bootstrap-3' and 'accounts-ui-bootstrap-3' from Atmosphere are included as dependencies in smart.json.*
+*A minified version of Bootbox.js (http://bootboxjs.com/), is also included. (v4.2.0)*
 
 Then just add the ` {{> managedUsers}} ` template wherever you want the management interface to be.
 
@@ -40,7 +41,7 @@ Adding Permissions
 Just add the below function somewhere where both the server and client have access to it, and then return an object of key/value pairs.
 
 ```javascript
-Meteor.ManagedUsers.availablePermissions = function() {
+ManagedUsers.availablePermissions = function() {
 	// Return an object of key/value pairs, like:  {permissionName: "Permission Description", ....}
 	// Do this in a file accessible by both the server and client.
 	return {};
@@ -49,7 +50,7 @@ Meteor.ManagedUsers.availablePermissions = function() {
 
 Testing for Permissions
 ------------------------
-` Meteor.ManagedUsers.hasPermission(permissionName) ` accepts a string of the permission's name, and then returns a boolean if the current user has that permission.
+` ManagedUsers.hasPermission(permissionName) ` accepts a string of the permission's name, and then returns a boolean if the current user has that permission.
 
 
 To Do
