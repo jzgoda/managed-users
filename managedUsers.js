@@ -1,4 +1,4 @@
-Meteor.ManagedUsers = {
+ManagedUsers = {
 	availablePermissions: function() {
 		// Return an object of key/value pairs, like:  {permissionName: "Permission Description", ....}
 		// Do this in a file accessible by both the server and client.
@@ -57,7 +57,7 @@ if(Meteor.isServer) {
 
 	Meteor.methods({
 		removeUser: function(userId) {
-			if(! Meteor.ManagedUsers.isAdmin())
+			if(! ManagedUsers.isAdmin())
 				throw new Meteor.Error(401, "Only admin is allowed to do this.");
 			if(Meteor.user()._id === userId)
 				throw new Meteor.Error(401, "Admin can not be removed.");
@@ -66,12 +66,12 @@ if(Meteor.isServer) {
 		},
 
 		updateUser: function(userId, username, name, address, permissions) {
-			if(! Meteor.ManagedUsers.isAdmin())
+			if(! ManagedUsers.isAdmin())
 				throw new Meteor.Error(401, "Only admin is allowed to do this.");
-			Meteor.ManagedUsers.checkUsername(username, userId);
+			ManagedUsers.checkUsername(username, userId);
 			if(!name)
 				throw new Meteor.Error(400, "Name can not be blank.");
-			Meteor.ManagedUsers.checkEmailAddress(address, userId);
+			ManagedUsers.checkEmailAddress(address, userId);
 			if(Meteor.user()._id === userId) {
 				username = "admin";
 				name = "Administrator";
@@ -91,7 +91,7 @@ if(Meteor.isServer) {
 		},
 
 		passwordReset: function(userId) {
-			if(! Meteor.ManagedUsers.isAdmin())
+			if(! ManagedUsers.isAdmin())
 				throw new Meteor.Error(401, "Only admin is allowed to do this.");
 			try {
 				Accounts.sendResetPasswordEmail(userId);
@@ -102,12 +102,12 @@ if(Meteor.isServer) {
 		},
 
 		addUser: function(username, name, address, permissions) {
-			if(! Meteor.ManagedUsers.isAdmin())
+			if(! ManagedUsers.isAdmin())
 				throw new Meteor.Error(401, "Only admin is allowed to do this.");
-			Meteor.ManagedUsers.checkUsername(username);
+			ManagedUsers.checkUsername(username);
 			if(!name)
 				throw new Meteor.Error(400, "Name can not be blank.");
-			Meteor.ManagedUsers.checkEmailAddress(address);
+			ManagedUsers.checkEmailAddress(address);
 			var newUserId = Accounts.createUser({username: username, email: address, profile: {name: name}});
 			if(address)
 				Accounts.sendEnrollmentEmail(newUserId);
@@ -127,7 +127,7 @@ if(Meteor.isClient) {
 
 	// A shared Handlebars helper that returns true when the logged in user is "admin"
 	Handlebars.registerHelper('isAdmin', function() {
-		return Meteor.ManagedUsers.isAdmin();
+		return ManagedUsers.isAdmin();
 	});
 
 	// The current user's full name
@@ -144,6 +144,6 @@ if(Meteor.isClient) {
 
 	// Pass the permission name (as a string) to this helper
 	Handlebars.registerHelper('hasPermission', function(permission) {
-		return Meteor.ManagedUsers.hasPermission(permission);
+		return ManagedUsers.hasPermission(permission);
 	});
 }

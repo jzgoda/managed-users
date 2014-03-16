@@ -4,23 +4,23 @@
 Tinytest.add("ManagedUsers - No Permissions Found", function(test) {
 	// I added this to "reset" the function to it's default, so re-runs of testing isn't broken.
 	// There should be a cleaner way to reset the testing state back to the default, as opposed to restarting the server
-	Meteor.ManagedUsers.availablePermissions = function() {
+	ManagedUsers.availablePermissions = function() {
 		return {};
 	}
 
-	test.equal(_.toArray(Meteor.ManagedUsers.availablePermissions()).length, 0, "There should be no permissions at this point.");
+	test.equal(_.toArray(ManagedUsers.availablePermissions()).length, 0, "There should be no permissions at this point.");
 });
 
 Tinytest.add("ManagedUsers - 2 Permissions Found", function(test) {
 	// Set the permissions 
-	Meteor.ManagedUsers.availablePermissions = function() {
+	ManagedUsers.availablePermissions = function() {
 		var permissions = {
 			allowThis: "Allow the user to do this",
 			allowThat: "Allow the user to do that"
 		};
 		return permissions;
 	}
-	test.equal(_.toArray(Meteor.ManagedUsers.availablePermissions()).length, 2, "There should be 2 permissions, this & that.");
+	test.equal(_.toArray(ManagedUsers.availablePermissions()).length, 2, "There should be 2 permissions, this & that.");
 });
 
 if(Meteor.isClient) {
@@ -43,7 +43,7 @@ if(Meteor.isClient) {
 	testAsyncMulti("ManagedUsers - Account manipulation", [
 		logoutStep,
 		function(test, expect) {
-			test.isFalse(Meteor.ManagedUsers.isAdmin());
+			test.isFalse(ManagedUsers.isAdmin());
 
 			Accounts.createUser({username: "someone", password: "abc123", profile: {name: "Some One"}}, function(error) {
 				test.equal(error.reason, "Signups forbidden");
@@ -61,7 +61,7 @@ if(Meteor.isClient) {
 			Meteor.loginWithPassword("admin", "abc123", expect(function(error) {
 				test.equal(error, undefined);
 				test.equal(Meteor.user().username, "admin");
-				test.isTrue(Meteor.ManagedUsers.isAdmin());
+				test.isTrue(ManagedUsers.isAdmin());
 			}));
 		},
 
