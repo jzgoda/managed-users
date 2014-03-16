@@ -14,7 +14,7 @@ Template.managedUsers.helpers({
 
 Template.managedUsers.clearForm = function() {
 	$(".username").val("");
-	$(".name").val("");
+	$(".fullName").val("");
 	$(".email").val("");
 	$(".permission").prop('checked', false);
 }
@@ -45,7 +45,7 @@ Template.managedUsers.events({
 	'click .editUser': function() {
 		var self = this;
 		$("#"+self._id+"_edit .username").val(self.username);
-		$("#"+self._id+"_edit .name").val(self.profile.name);
+		$("#"+self._id+"_edit .fullName").val(self.profile.name);
 		if(self.emails && self.emails[0]) {
 			$("#"+self._id+"_edit .email").val(self.emails[0].address);
 		}
@@ -59,12 +59,12 @@ Template.managedUsers.events({
 	'click .editSave': function() {
 		var self = this;
 		var permissions = {};
-		_.keys(Meteor.ManagedUsers.availablePermissions()).forEach(function(k) { 
+		_.keys(ManagedUsers.availablePermissions()).forEach(function(k) {
 			permissions[k] = $("#"+self._id+"_edit .permissions ."+k).prop('checked');
 		});
 		Meteor.call('updateUser', self._id, 
 			$("#"+self._id+"_edit .username").val(), 
-			$("#"+self._id+"_edit .name").val(), 
+			$("#"+self._id+"_edit .fullName").val(),
 			$("#"+self._id+"_edit .email").val(),
 			permissions,
 			function(error, result) {
@@ -102,12 +102,12 @@ Template.managedUsers.events({
 	'click #submit' : function () {
 		var self = this;
 		var permissions = {};
-		_.keys(Meteor.ManagedUsers.availablePermissions()).forEach(function(k) { 
+		_.keys(ManagedUsers.availablePermissions()).forEach(function(k) {
 			permissions[k] = $("#newUser .permissions ."+k).prop('checked');
 		});
 		Meteor.call('addUser',
-			$("#newUser .username").val(), 
-			$("#newUser .name").val(), 
+			$("#newUser .username").val(),
+			$("#newUser .fullName").val(),
 			$("#newUser .email").val(),
 			permissions,
 			function(error, result) {
@@ -133,8 +133,8 @@ Template.managedUsers.events({
 // managedUserForm
 Template.managedUserForm.permissions = function() {
 	var permissions = new Array();
-	_.keys(Meteor.ManagedUsers.availablePermissions()).forEach(function(k) { 
-		permissions.push({name: k, description: Meteor.ManagedUsers.availablePermissions()[k]});
+	_.keys(ManagedUsers.availablePermissions()).forEach(function(k) {
+		permissions.push({name: k, description: ManagedUsers.availablePermissions()[k]});
 	});
 	return permissions;
 }
