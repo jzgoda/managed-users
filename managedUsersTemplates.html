@@ -49,16 +49,14 @@
 			<div class="col-md-6 well">
 				<form id="newUser" role="form" class="form-horizontal">
 					<legend>New User</legend>
-					{{#isolate}}
-						{{#if newManagedUserError}}
-							<div class="row">
-								<div class="col-md-12 alert alert-danger alert-dismissable">
-									<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-									<strong>Error:</strong> {{newManagedUserError}}
-								</div>
+					{{#if newManagedUserError}}
+						<div class="row">
+							<div class="col-md-12 alert alert-danger alert-dismissable">
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+								<strong>Error:</strong> {{newManagedUserError}}
 							</div>
-						{{/if}}
-					{{/isolate}}
+						</div>
+					{{/if}}
 					{{> managedUserForm}}
 					<div class="form-group">
 						<div class="col-md-offset-3 col-md-9">
@@ -84,16 +82,14 @@
 					<div class="row">
 						<div class="col-sm-12">
 							<form role="form" class="well form-horizontal">
-								{{#isolate}}
-									{{#if editManagedUserError}}
-										<div class="row">
-											<div class="col-md-12 alert alert-danger alert-dismissable">
-												<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-												<strong>Error:</strong> {{editManagedUserError}}
-											</div>
+								{{#if editManagedUserError}}
+									<div class="row">
+										<div class="col-md-12 alert alert-danger alert-dismissable">
+											<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+											<strong>Error:</strong> {{editManagedUserError}}
 										</div>
-									{{/if}}
-								{{/isolate}}
+									</div>
+								{{/if}}
 								{{> managedUserForm}}
 							</form>
 						</div>
