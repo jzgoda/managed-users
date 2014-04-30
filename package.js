@@ -3,7 +3,7 @@ Package.describe({
 });
 
 Package.on_use(function(api, where) {
-	api.use(['minimongo', 'mongo-livedata', 'templating', 'accounts-password', 'email'], ['client', 'server']);
+	api.use(['minimongo', 'mongo-livedata', 'templating', 'accounts-password', 'email', 'bootstrap-3', 'accounts-ui-bs3-and-blaze'], ['client', 'server']);
 	api.use(['handlebars'], 'client');
 	api.add_files(['managedUsers.js'], ['client', 'server']);
 	api.add_files(['managedUsersTemplates.html', 'managedUsersTemplates.js', 'bootbox.min.js'], 'client');
