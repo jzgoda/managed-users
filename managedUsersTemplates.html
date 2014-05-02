@@ -1,60 +1,72 @@
 <template name="managedUsers">
-	{{#if managedUserError}}
-		<div class="row">
-			<div class="col-md-12 alert alert-danger alert-dismissable">
-				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-				<strong>Error:</strong> {{managedUserError}}
-			</div>
-		</div>
-	{{/if}}
-	<div class="row">
-		<table class="table table-hover col-md-12">
-			<thead>
-				<tr>
-					<th class="col-md-3">Username</th>
-					<th class="col-md-4">Full Name</th>
-					<th class="col-md-4">Email Address</th>
-					<th class="col-md-1"></th>
-				</tr>
-			</thead>
-			<tbody>
-				{{#each systemUsers}}
-					<tr>
-						<td class="col-md-3">
-							<span class="username">{{username}}</span>
-						</td>
-						<td class="col-md-4">
-							<span class="fullName">{{profile.name}}</span>
-						</td>
-						<td class="col-md-4">
-							<span class="emailAddress">
-								{{emailAddress this}}
-							</span>
-						</td>
-						<td class="col-md-1">
-							<span class="glyphicon glyphicon-edit editUser" data-toggle="modal" data-target="#{{_id}}_edit"></span>
-							<span class="glyphicon glyphicon-remove remove-user"></span>
-							{{> managedUserEditModal}}
-						</td>
-					</tr>
-				{{/each}}
-			</tbody>
-		</table>
-	</div>
+	{{> managedUsersMessage}}
+	{{> managedUsersTable}}
 	<div class="row">
 		<hr/>
 	</div>
+	{{> newUserForm}}
+</template>
+
+<template name="managedUsersMessage">
+	{{#if managedUserError}}
+	<div class="row">
+		<div class="col-md-12 alert alert-danger alert-dismissable">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			<strong>Error:</strong> {{managedUserError}}
+		</div>
+	</div>
+	{{/if}}
+</template>
+
+<template name="managedUsersTable">
+	<div class="row">
+		<table class="table table-hover col-md-12">
+			<thead>
+			<tr>
+				<th class="col-md-3">Username</th>
+				<th class="col-md-4">Full Name</th>
+				<th class="col-md-4">Email Address</th>
+				<th class="col-md-1"></th>
+			</tr>
+			</thead>
+			<tbody>
+			{{#each systemUsers}}
+			<tr>
+				<td class="col-md-3">
+					<span class="username">{{username}}</span>
+				</td>
+				<td class="col-md-4">
+					<span class="fullName">{{profile.name}}</span>
+				</td>
+				<td class="col-md-4">
+							<span class="emailAddress">
+								{{emailAddress this}}
+							</span>
+				</td>
+				<td class="col-md-1">
+					<span class="glyphicon glyphicon-edit editUser" data-toggle="modal" data-target="#{{_id}}_edit"></span>
+					<span class="glyphicon glyphicon-remove remove-user"></span>
+					{{> managedUserEditModal}}
+				</td>
+			</tr>
+			{{/each}}
+			</tbody>
+		</table>
+	</div>
+</template>
+
+<template name="newUserForm">
 	<div class="row">
 		<div class="col-md-6 well">
 			<form id="newUser" role="form" class="form-horizontal">
 				<legend>New User</legend>
 				{{#if newManagedUserError}}
-					<div class="row">
-						<div class="col-md-12 alert alert-danger alert-dismissable">
-							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-							<strong>Error:</strong> {{newManagedUserError}}
-						</div>
+				<div class="row">
+					<div class="col-md-12 alert alert-danger alert-dismissable">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+						<strong>Error:</strong> {{newManagedUserError}}
 					</div>
+				</div>
 				{{/if}}
 				{{> managedUserForm}}
 				<div class="form-group">
